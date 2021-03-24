@@ -6,6 +6,7 @@ ini_set('display_startup_errors', 1);
 
 if ( isset($_GET['clear_cache']) AND $_GET['clear_cache'] == 'true' ) {
     $files = glob('cache/*');
+    print_r($files);
     foreach($files as $file){
         if(is_file($file)) {
             @unlink($file);
