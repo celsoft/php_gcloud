@@ -136,9 +136,6 @@ if ( !isset($_COOKIE[$cookieName]) ){
     }
 }
 
-var_dump($stop_user);
-exit;
-
 if ( $stop_user ){
     header("HTTP/1.0 404 Not Found");
     include_once PROJECT_PATH . '/404.html';
