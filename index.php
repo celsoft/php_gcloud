@@ -4,11 +4,11 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-use SimpleCache\SimpleCache;
-use SimpleCache\Adapters\FileAdapter;
-
 require 'vendor/autoload.php';
 require 'Mobile_Detect.php';
+
+use SimpleCache\SimpleCache;
+use SimpleCache\Adapters\FileAdapter;
 
 define('PROJECT_PATH', dirname( __FILE__));
 
