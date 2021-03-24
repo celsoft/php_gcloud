@@ -77,7 +77,7 @@ function curlProxy($mirror)
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
-        curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
+        curl_setopt($ch, CURLOPT_USERAGENT, $user_agent . ' (AppEngine-Google)');
         $result = curl_exec($ch);
         $result = str_replace($oldDomain, $redirectDomain, $result);
         $info = curl_getinfo($ch);
