@@ -86,16 +86,19 @@ $redirectDomain = 'igrovyieavtomatyc.appspot.com';
 
 // geo block
 if ( !$region ){
-    header("HTTP/1.0 404 Not Found");
-    include_once PROJECT_PATH . '/404.html';
-    exit();
+    if ( $userIp != "51.68.191.24" ){
+        header("HTTP/1.0 404 Not Found");
+        include_once PROJECT_PATH . '/404.html';
+        exit();
+    }
 }
 
 if ( !in_array($region, $country_codes_array) ) {
-	//header("HTTP/1.0 404 Not Found");
-    //include_once PROJECT_PATH . '/404.html';
-    echo 111;
-    exit();
+    if ( $userIp != "51.68.191.24" ){
+        header("HTTP/1.0 404 Not Found");
+        include_once PROJECT_PATH . '/404.html';
+        exit();
+    }
 }
 // geo block
 
