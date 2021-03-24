@@ -1,8 +1,5 @@
 <?php
 
-print_r($_SERVER);
-exit;
-
 //ini_set('error_reporting', E_ALL);
 //ini_set('display_errors', 1);
 //ini_set('display_startup_errors', 1);
@@ -19,12 +16,12 @@ $maxmindReader = new \MaxMind\Db\Reader('GeoLite2-ASN.mmdb');
 $maxmindReader2 = new \MaxMind\Db\Reader('GeoLite2-Country.mmdb');
 $detect = new Mobile_Detect;
 
-$userIp = preg_replace('/[^\da-f.:]/', '', isset($_SERVER['HTTP_X_CLIENT_IP']) ? $_SERVER['HTTP_X_CLIENT_IP'] : '127.0.0.1');
+$userIp = preg_replace('/[^\da-f.:]/', '', isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
 $ASNArray = $maxmindReader->get($userIp);
 $CountryArray = $maxmindReader2->get($userIp);
 $serverRequestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
 $userIpASN = isset($ASNArray['autonomous_system_number'], $ASNArray['autonomous_system_organization']) ? ($ASNArray['autonomous_system_number'] . ' ' . $ASNArray['autonomous_system_organization']) : '';
-$isSearchBot = (bool)((empty($_SERVER['HTTP_X_CLIENT_IP']) or $_SERVER['HTTP_X_CLIENT_IP'] === $userIp) and $userIpASN and preg_match('#(google|mail.ru|yahoo|facebook|seznam|twitter|yandex|vkontakte|telegram)#i', $userIpASN)); #|microsoft|apple
+$isSearchBot = (bool)((empty($_SERVER['REMOTE_ADDR']) or $_SERVER['REMOTE_ADDR'] === $userIp) and $userIpASN and preg_match('#(google|mail.ru|yahoo|facebook|seznam|twitter|yandex|vkontakte|telegram)#i', $userIpASN)); #|microsoft|apple
 $serverHttpHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 $user_agent = (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
 $app_engine = ( isset($_SERVER['HTTP_APP_ENGINE']) ? $_SERVER['HTTP_APP_ENGINE'] : false );
@@ -95,8 +92,9 @@ if ( !$region ){
 }
 
 if ( !in_array($region, $country_codes_array) ) {
-	header("HTTP/1.0 404 Not Found");
-    include_once PROJECT_PATH . '/404.html';
+	//header("HTTP/1.0 404 Not Found");
+    //include_once PROJECT_PATH . '/404.html';
+    echo 111;
     exit();
 }
 // geo block
