@@ -8,6 +8,8 @@ runtime: php73
 # entrypoint: serve index.php
 
 handlers:
+  - url: /favicon\.ico
+    static_files: favicon.ico
   - url: /.*
     script: auto
     secure: always
