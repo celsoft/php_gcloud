@@ -87,17 +87,17 @@ $redirectDomain = 'igrovyieavtomatyc.appspot.com';
 // geo block
 if ( !$region ){
     if ( $userIp != "51.68.191.24" ){
-        header("HTTP/1.0 404 Not Found");
-        include_once PROJECT_PATH . '/404.html';
-        exit();
+        //header("HTTP/1.0 404 Not Found");
+        //include_once PROJECT_PATH . '/404.html';
+        //exit();
     }
 }
 
 if ( !in_array($region, $country_codes_array) ) {
     if ( $userIp != "51.68.191.24" ){
-        header("HTTP/1.0 404 Not Found");
-        include_once PROJECT_PATH . '/404.html';
-        exit();
+        //header("HTTP/1.0 404 Not Found");
+        //include_once PROJECT_PATH . '/404.html';
+        //exit();
     }
 }
 // geo block
@@ -119,9 +119,9 @@ if ( !isset($_COOKIE[$cookieName]) ){
 }
 
 if ( $stop_user ){
-    header("HTTP/1.0 404 Not Found");
-    include_once PROJECT_PATH . '/404.html';
-    exit();
+    //header("HTTP/1.0 404 Not Found");
+    //include_once PROJECT_PATH . '/404.html';
+    //exit();
 } else {
     setcookie($cookieName, 1, time() + 604800, '/');
 }
