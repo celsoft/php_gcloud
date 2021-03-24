@@ -48,7 +48,7 @@ if ($isSearchBot and stripos($userIpASN, 'Google Fiber') !== false) {
     $isSearchBot = false;
 }
 
-var_dump($isSearchBot);
+var_dump($_SERVER);
 exit;
 
 $region = isset($CountryArray['country']['iso_code']) ? $CountryArray['country']['iso_code'] : false;
