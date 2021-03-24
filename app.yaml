@@ -1,5 +1,5 @@
 # Use PHP 7.3 by replacing "php72" below with "php73"
-runtime: php72
+runtime: php73
 
 # Defaults to "serve index.php" and "serve public/index.php". Can be used to
 # serve a custom PHP front controller (e.g. "serve backend/index.php") or to
@@ -9,6 +9,6 @@ runtime: php72
 
 handlers:
   - url: /.*
-    script: index.php
+    script: auto
     secure: always
     redirect_http_response_code: 301
