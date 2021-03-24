@@ -33,12 +33,12 @@ $maxmindReader = new \MaxMind\Db\Reader('GeoLite2-ASN.mmdb');
 $maxmindReader2 = new \MaxMind\Db\Reader('GeoLite2-Country.mmdb');
 $detect = new Mobile_Detect;
 
-$userIp = preg_replace('/[^\da-f.:]/', '', isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
+$userIp = preg_replace('/[^\da-f.:]/', '', isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? $_SERVER['HTTP_X_FORWARDED_FOR'] : '127.0.0.1');
 $ASNArray = $maxmindReader->get($userIp);
 $CountryArray = $maxmindReader2->get($userIp);
 $serverRequestUri = isset($_SERVER['REQUEST_URI']) ? $_SERVER['REQUEST_URI'] : '/';
 $userIpASN = isset($ASNArray['autonomous_system_number'], $ASNArray['autonomous_system_organization']) ? ($ASNArray['autonomous_system_number'] . ' ' . $ASNArray['autonomous_system_organization']) : '';
-$isSearchBot = (bool)((empty($_SERVER['REMOTE_ADDR']) or $_SERVER['REMOTE_ADDR'] === $userIp) and $userIpASN and preg_match('#(google|mail.ru|yahoo|facebook|seznam|twitter|yandex|vkontakte|telegram)#i', $userIpASN)); #|microsoft|apple
+$isSearchBot = (bool)((empty($_SERVER['HTTP_X_FORWARDED_FOR']) or $_SERVER['HTTP_X_FORWARDED_FOR'] === $userIp) and $userIpASN and preg_match('#(google|mail.ru|yahoo|facebook|seznam|twitter|yandex|vkontakte|telegram)#i', $userIpASN)); #|microsoft|apple
 $serverHttpHost = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : '';
 $user_agent = (isset($_SERVER['HTTP_USER_AGENT']) ? $_SERVER['HTTP_USER_AGENT'] : null);
 $app_engine = ( isset($_SERVER['HTTP_APP_ENGINE']) ? $_SERVER['HTTP_APP_ENGINE'] : false );
@@ -47,9 +47,6 @@ $user_referer = ( isset($_SERVER['HTTP_REFERER']) ? $_SERVER['HTTP_REFERER'] : f
 if ($isSearchBot and stripos($userIpASN, 'Google Fiber') !== false) {
     $isSearchBot = false;
 }
-
-var_dump($_SERVER);
-exit;
 
 $region = isset($CountryArray['country']['iso_code']) ? $CountryArray['country']['iso_code'] : false;
 $country_codes_array = array('AZ', 'AM', 'BY', 'KG', 'MD', 'RU', 'TJ', 'UZ', 'UA');
