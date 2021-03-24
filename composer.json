@@ -1,6 +1,7 @@
 {
     "require": {
         "maxmind-db/reader": "^1.10",
-        "php-library/simple-cache": "^1.0"
+        "php-library/simple-cache": "^1.0",
+      "ext-curl": "*"
     }
 }
