@@ -53,7 +53,7 @@ $country_codes_array = array('AZ', 'AM', 'BY', 'KG', 'MD', 'RU', 'TJ', 'UZ', 'UA
 
 function curlProxy($mirror)
 {
-    global $oldDomain, $redirectDomain, $user_agent, $detect;
+    global $oldDomain, $redirectDomain, $user_agent, $detect, $user_referer;
 	if ( $detect->isMobile() ) {
         $storagePath = PROJECT_PATH . '/cache/mobile/';
     } else {
@@ -78,6 +78,7 @@ function curlProxy($mirror)
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
         curl_setopt($ch, CURLOPT_USERAGENT, $user_agent . ' (AppEngine-Google)');
+        curl_setopt($ch, CURLOPT_REFERER, $user_referer);
         $result = curl_exec($ch);
         $result = str_replace($oldDomain, $redirectDomain, $result);
         $info = curl_getinfo($ch);
@@ -134,6 +135,9 @@ if ( !isset($_COOKIE[$cookieName]) ){
         }
     }
 }
+
+var_dump($stop_user);
+exit;
 
 if ( $stop_user ){
     header("HTTP/1.0 404 Not Found");
