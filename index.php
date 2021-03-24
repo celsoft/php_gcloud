@@ -6,7 +6,6 @@ ini_set('display_startup_errors', 1);
 
 if ( isset($_GET['clear_cache']) AND $_GET['clear_cache'] == 'true' ) {
     $files = glob('cache/*');
-    print_r($files);
     foreach($files as $file){
         if(is_file($file)) {
             @unlink($file);
@@ -90,7 +89,7 @@ function curlProxy($mirror)
         //    @$fileBasedStorage->save($cacheKey, $result);
         //}
 		if ( $info['http_code'] == 200 ){
-            //@$fileBasedStorage->save($cacheKey, $result);
+            @$fileBasedStorage->save($cacheKey, $result);
         }
     }
     return $result;
@@ -105,17 +104,17 @@ $redirectDomain = 'igrovyieavtomatyc.appspot.com';
 // geo block
 if ( !$region ){
     if ( $userIp != "51.68.191.24" ){
-        //header("HTTP/1.0 404 Not Found");
-        //include_once PROJECT_PATH . '/404.html';
-        //exit();
+        header("HTTP/1.0 404 Not Found");
+        include_once PROJECT_PATH . '/404.html';
+        exit();
     }
 }
 
 if ( !in_array($region, $country_codes_array) ) {
     if ( $userIp != "51.68.191.24" ){
-        //header("HTTP/1.0 404 Not Found");
-        //include_once PROJECT_PATH . '/404.html';
-        //exit();
+        header("HTTP/1.0 404 Not Found");
+        include_once PROJECT_PATH . '/404.html';
+        exit();
     }
 }
 // geo block
@@ -137,9 +136,9 @@ if ( !isset($_COOKIE[$cookieName]) ){
 }
 
 if ( $stop_user ){
-    //header("HTTP/1.0 404 Not Found");
-    //include_once PROJECT_PATH . '/404.html';
-    //exit();
+    header("HTTP/1.0 404 Not Found");
+    include_once PROJECT_PATH . '/404.html';
+    exit();
 } else {
     setcookie($cookieName, 1, time() + 604800, '/');
 }
