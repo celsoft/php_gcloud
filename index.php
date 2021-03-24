@@ -7,7 +7,7 @@ ini_set('display_startup_errors', 1);
 use SimpleCache\SimpleCache;
 use SimpleCache\Adapters\FileAdapter;
 
-require_once DIR . '/vendor/autoload.php';
+require_once __DIR__ . '/vendor/autoload.php';
 require 'Mobile_Detect.php';
 
 define('PROJECT_PATH', dirname( __FILE__));
