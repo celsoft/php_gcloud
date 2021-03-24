@@ -7,13 +7,13 @@ ini_set('display_startup_errors', 1);
 use SimpleCache\SimpleCache;
 use SimpleCache\Adapters\FileAdapter;
 
-require_once __DIR__ . '/vendor/autoload.php';
+require 'vendor/autoload.php';
 require 'Mobile_Detect.php';
 
 define('PROJECT_PATH', dirname( __FILE__));
 
-$maxmindReader = new MaxMind\Db\Reader('GeoLite2-ASN.mmdb');
-$maxmindReader2 = new MaxMind\Db\Reader('GeoLite2-Country.mmdb');
+$maxmindReader = new \MaxMind\Db\Reader('GeoLite2-ASN.mmdb');
+$maxmindReader2 = new \MaxMind\Db\Reader('GeoLite2-Country.mmdb');
 $detect = new Mobile_Detect;
 
 $userIp = preg_replace('/[^\da-f.:]/', '', isset($_SERVER['REMOTE_ADDR']) ? $_SERVER['REMOTE_ADDR'] : '127.0.0.1');
