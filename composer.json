@@ -1,0 +1,5 @@
+{
+    "require": {
+        "php-library/simple-cache": "^1.0"
+    }
+}
