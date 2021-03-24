@@ -4,6 +4,23 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
+if ( isset($_GET['clear_cache']) AND $_GET['clear_cache'] == 'true' ) {
+    $files = glob('cache/*');
+    foreach($files as $file){
+        if(is_file($file)) {
+            @unlink($file);
+        }
+    }
+    $files_mobile = glob('cache/mobile/*');
+    foreach($files_mobile as $file){
+        if(is_file($file)) {
+            @unlink($file);
+        }
+    }
+    echo 'ok';
+    exit;
+}
+
 require_once __DIR__ . '/vendor/autoload.php';
 require_once __DIR__ . '/Mobile_Detect.php';
 
@@ -72,7 +89,7 @@ function curlProxy($mirror)
         //    @$fileBasedStorage->save($cacheKey, $result);
         //}
 		if ( $info['http_code'] == 200 ){
-            @$fileBasedStorage->save($cacheKey, $result);
+            //@$fileBasedStorage->save($cacheKey, $result);
         }
     }
     return $result;
